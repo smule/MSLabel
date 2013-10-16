@@ -119,25 +119,26 @@ static const int kAlignmentBuffer = 5;
         
         CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), self.shadowOffset, 0, self.shadowColor.CGColor);
         
-        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+		//we need this to compile on iOS6 so taking out the iOS7 calls
+//        if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
             // NOTE: Used to be UILineBreakModeClip but is now deprecated. Checking the headers UILineBreakModeClip == NSLineBreakByClipping,
             // so this is safe even below iOS 6 if using xcode > 4.0.
             [line drawAtPoint:CGPointMake(drawX, drawY) forWidth:self.frame.size.width withFont:self.font fontSize:self.font.pointSize lineBreakMode:NSLineBreakByClipping baselineAdjustment:UIBaselineAdjustmentNone];
-        } else {
-            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-            paragraphStyle.lineBreakMode = NSLineBreakByClipping;
-            
-            NSShadow *shadowStyle = [[NSShadow alloc] init];
-            shadowStyle.shadowColor = self.shadowColor;
-            shadowStyle.shadowOffset = self.shadowOffset;
-            
-            [line drawAtPoint:CGPointMake(drawX, drawY) withAttributes:@{
-                                                                         NSParagraphStyleAttributeName : paragraphStyle,
-                                                                         NSFontAttributeName : self.font,
-                                                                         NSForegroundColorAttributeName : self.textColor,
-                                                                         NSShadowAttributeName : shadowStyle
-                                                                         }];
-        }
+//        } else {
+//            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//            paragraphStyle.lineBreakMode = NSLineBreakByClipping;
+//            
+//            NSShadow *shadowStyle = [[NSShadow alloc] init];
+//            shadowStyle.shadowColor = self.shadowColor;
+//            shadowStyle.shadowOffset = self.shadowOffset;
+//            
+//            [line drawAtPoint:CGPointMake(drawX, drawY) withAttributes:@{
+//                                                                         NSParagraphStyleAttributeName : paragraphStyle,
+//                                                                         NSFontAttributeName : self.font,
+//                                                                         NSForegroundColorAttributeName : self.textColor,
+//                                                                         NSShadowAttributeName : shadowStyle
+//                                                                         }];
+//        }
     }
 }
 
